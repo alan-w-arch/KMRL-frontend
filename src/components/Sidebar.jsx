@@ -54,7 +54,7 @@ function Sidebar({ sidebarOpen }) {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-full bg-white border-r border-neutral-200 z-30 transition-all duration-300 flex flex-col
+        className={`fixed top-3 left-0 h-full bg-white border-r border-neutral-200 z-30 transition-all duration-300 flex flex-col
           ${expanded ? "w-64" : "w-16"}
           ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
@@ -70,14 +70,14 @@ function Sidebar({ sidebarOpen }) {
           )}
         </div>
 
-        {/* Floating toggle button */}
+        {/* Floating toggle button*/}
         <button
           onClick={() => setExpanded((prev) => !prev)}
           className="absolute top-1/2 -right-4 transform -translate-y-1/2 p-2 bg-white border border-neutral-200 rounded-full shadow-lg hover:shadow-xl hover:bg-neutral-50 transition-all z-50"
           aria-label={expanded ? "Collapse Sidebar" : "Expand Sidebar"}
         >
           {expanded ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
-        </button>
+        </button> 
 
         {/* Navigation */}
         <nav className="flex flex-col p-2 gap-1 flex-1">

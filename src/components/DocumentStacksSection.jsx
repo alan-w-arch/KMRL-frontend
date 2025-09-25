@@ -42,7 +42,9 @@ const DocumentStacksSection = ({ userId }) => {
       try {
         setLoading(true);
         const response = await listDocuments(userId);
+        console.log("Fetched documents:", response);
         const documents = response.documents || response.data || response;
+        console.log("Normalized documents:", documents);
         if (Array.isArray(documents)) categorizeDocuments(documents);
       } catch (err) {
         console.error("Error fetching documents:", err);
@@ -173,7 +175,7 @@ const DocumentStacksSection = ({ userId }) => {
         {Array.from({ length: 5 }).map((_, i) => (
           <div
             key={i}
-            className="h-96 rounded-2xl bg-neutral-200 animate-pulse"
+            className="h-full rounded-2xl bg-neutral-200 animate-pulse "
           />
         ))}
       </div>
