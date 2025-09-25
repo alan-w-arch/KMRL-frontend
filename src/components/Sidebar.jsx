@@ -10,128 +10,91 @@ import {
   FolderCode,
   View,
   Crown,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useState, useMemo } from "react";
 
-function Sidebar({ sidebarOpen, setSidebarOpen }) {
+function Sidebar({ sidebarOpen }) {
   const { t } = useLanguage();
+  const [expanded, setExpanded] = useState(true);
 
   const linkClasses = ({ isActive }) =>
-    `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+    `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium ${
       isActive
-        ? "bg-green-500/40 text-neutral font-medium"
-        : "text-neutral-600 hover:bg-neutral-100"
+        ? "bg-green-500/20 text-green-700"
+        : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
     }`;
+
+  const links = useMemo(
+    () => [
+      {
+        to: "/dashboard",
+        icon: <LayoutDashboard size={20} />,
+        label: t.dashboard,
+      },
+      { to: "/uploadfile", icon: <FileUp size={20} />, label: t.documents },
+      { to: "/uploadurl", icon: <Link2 size={20} />, label: t.uploadLink },
+      { to: "/history", icon: <FileClock size={20} />, label: t.history },
+      { to: "/help", icon: <HandHelping size={20} />, label: t.help },
+      { to: "/compliance", icon: <FileText size={20} />, label: t.compliance },
+      { to: "/view-summary", icon: <View size={20} />, label: t.viewsummary },
+      { to: "/analytics", icon: <ChartLine size={20} />, label: t.analytics },
+      { to: "/about", icon: <FolderCode size={20} />, label: t.about },
+      {
+        to: "/admin-options",
+        icon: <Crown size={20} />,
+        label: t.adminOptions,
+      },
+    ],
+    [t]
+  );
 
   return (
     <>
       <aside
-        className={`fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-white border-r border-neutral-200 z-30 transform transition-transform duration-300
+        className={`fixed top-0 left-0 h-full bg-white border-r border-neutral-200 z-30 transition-all duration-300 flex flex-col
+          ${expanded ? "w-64" : "w-16"}
           ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-          }`}
+          }
+          overflow-hidden`}
       >
-        <nav className="p-4 space-y-2 mt-4">
-          {/* Dashboard */}
-          <NavLink
-            to="/dashboard"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)} // close on mobile
-          >
-            <LayoutDashboard size={20} />
-            {t.dashboard}
-          </NavLink>
+        {/* Brand / Logo */}
+        <div className="flex items-center justify-center h-16 border-b border-neutral-200 px-2">
+          {expanded ? (
+            <span className="font-bold text-xl text-green-600">DocuFlow</span>
+          ) : (
+            <LayoutDashboard size={24} className="text-green-600" />
+          )}
+        </div>
 
-          {/* Upload File */}
-          <NavLink
-            to="/uploadfile"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <FileUp size={20} />
-            {t.documents}
-          </NavLink>
+        {/* Floating toggle button */}
+        <button
+          onClick={() => setExpanded((prev) => !prev)}
+          className="absolute top-1/2 -right-4 transform -translate-y-1/2 p-2 bg-white border border-neutral-200 rounded-full shadow-lg hover:shadow-xl hover:bg-neutral-50 transition-all z-50"
+          aria-label={expanded ? "Collapse Sidebar" : "Expand Sidebar"}
+        >
+          {expanded ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+        </button>
 
-          {/* Upload URL */}
-          <NavLink
-            to="/uploadurl"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <Link2 size={20} />
-            {t.uploadLink}
-          </NavLink>
-
-          <NavLink
-            to="/history"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <FileClock size={20} />
-            {t.history}
-          </NavLink>
-
-          <NavLink
-            to="/help"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <HandHelping size={20} />
-            {t.help}
-          </NavLink>
-
-          <NavLink
-            to="/compliance"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <FileText size={20} />
-            {t.compliance}
-          </NavLink>
-
-          <NavLink
-            to="/view-summary"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <View size={20} />
-            {t.viewsummary}
-          </NavLink>
-
-          {/* Analytics */}
-          <NavLink
-            to="/analytics"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <ChartLine size={20} />
-            {t.analytics}
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <FolderCode size={20} />
-            {t.about}
-          </NavLink>
-          <NavLink
-            to="/admin-options"
-            className={linkClasses}
-            onClick={() => setSidebarOpen(false)}
-          >
-            <Crown size={20} />
-            {t.adminOptions}
-          </NavLink>
+        {/* Navigation */}
+        <nav className="flex flex-col p-2 gap-1 flex-1">
+          {links.map((link) => (
+            <NavLink key={link.to} to={link.to} className={linkClasses}>
+              <div className="flex items-center gap-3">
+                {link.icon}
+                {expanded && link.label}
+              </div>
+            </NavLink>
+          ))}
         </nav>
       </aside>
 
       {/* Overlay for mobile */}
       {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 z-20 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
+        <div className="fixed inset-0 bg-black/20 z-20 lg:hidden" />
       )}
     </>
   );
