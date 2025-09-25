@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@theme {
+  /* === CORE BRAND COLORS === */
+  --color-primary: oklch(0.2895 0.0622 263.95); /* Deep navy */
+  --color-secondary: oklch(0.9755 0.0045 258.32); /* Off white */
+  --color-accent: oklch(0.7045 0.1926 39.23); /* Vibrant orange */
+  --color-success: oklch(0.5685 0.1187 154.95); /* Soft green */
+  --color-warning: oklch(0.7927 0.171 70.67); /* Warm yellow */
+  --color-danger: oklch(0.5771 0.2152 27.33); /* Bright red */
+
+  /* === EXTENDED PALETTE === */
+  --color-neutral-50: oklch(0.98 0.002 258.32);   /* Lightest gray */
+  --color-neutral-100: oklch(0.95 0.005 258.32);  /* Very light gray */
+  --color-neutral-200: oklch(0.89 0.008 258.32);  /* Light gray */
+  --color-neutral-300: oklch(0.78 0.012 258.32);  /* Medium light gray */
+  --color-neutral-400: oklch(0.65 0.015 258.32);  /* Medium gray */
+  --color-neutral-500: oklch(0.52 0.018 258.32);  /* True gray */
+  --color-neutral-600: oklch(0.42 0.021 263.95);  /* Medium dark gray */
+  --color-neutral-700: oklch(0.35 0.025 263.95);  /* Dark gray */
+  --color-neutral-800: oklch(0.25 0.030 263.95);  /* Darker gray */
+  --color-neutral-900: oklch(0.15 0.035 263.95);  /* Darkest gray */
+
+  /* === PRIORITY & STATUS COLORS === */
+  --color-urgent: oklch(0.6271 0.2571 12.17);     /* Bright red-orange for critical */
+  --color-high: oklch(0.6771 0.2152 27.33);       /* Red for high priority */
+  --color-medium: oklch(0.7427 0.151 50.67);      /* Orange for medium */
+  --color-low: oklch(0.6685 0.1187 154.95);       /* Green for low priority */
+  --color-completed: oklch(0.5685 0.1187 154.95); /* Success green */
+  --color-pending: oklch(0.7927 0.171 70.67);     /* Warning yellow */
+  --color-overdue: oklch(0.5771 0.2152 27.33);    /* Danger red */
+
+  /* === DEPARTMENT COLORS === */
+  --color-engineering: oklch(0.6045 0.1526 220.15);    /* Blue */
+  --color-operations: oklch(0.5845 0.1687 142.45);     /* Teal */
+  --color-maintenance: oklch(0.6245 0.1426 289.75);    /* Purple */
+  --color-safety: oklch(0.5771 0.2152 27.33);          /* Red */
+  --color-finance: oklch(0.5645 0.1387 95.45);         /* Green */
+  --color-hr: oklch(0.6445 0.1726 341.23);             /* Pink */
+  --color-procurement: oklch(0.6145 0.1626 180.25);    /* Cyan */
+  --color-regulatory: oklch(0.5945 0.1426 60.15);      /* Amber */
+
+  /* === UI STATE COLORS === */
+  --color-info: oklch(0.6445 0.1526 220.15);      /* Information blue */
+  --color-disabled: oklch(0.65 0.008 258.32);     /* Disabled state */
+  --color-border: oklch(0.89 0.008 258.32);       /* Default borders */
+  --color-divider: oklch(0.95 0.005 258.32);      /* Subtle dividers */
+  --color-hover: oklch(0.95 0.005 258.32);        /* Hover backgrounds */
+  --color-focus: oklch(0.7045 0.1926 39.23);      /* Focus ring (accent) */
+
+  /* === DOCUMENT TYPE COLORS === */
+  --color-pdf: oklch(0.5771 0.2152 27.33);        /* Red for PDFs */
+  --color-doc: oklch(0.6445 0.1526 220.15);       /* Blue for DOC files */
+  --color-excel: oklch(0.5645 0.1387 95.45);      /* Green for Excel */
+  --color-image: oklch(0.6245 0.1426 289.75);     /* Purple for images */
+  --color-video: oklch(0.6145 0.1626 180.25);     /* Cyan for videos */
+
+  /* === TYPOGRAPHY === */
+  --font-sans: "Inter", "Noto Sans Malayalam", "sans-serif";
+  --font-heading: "Poppins", "Noto Sans Malayalam", "sans-serif";
+  --font-mono: "Fira Code", "JetBrains Mono", "monospace";
+  --font-malayalam: "Noto Sans Malayalam", "Manjari", "sans-serif";
+
+  /* === FONT SIZES === */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+
+  /* === SPACING SCALE === */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+
+  /* === BORDER RADIUS === */
+  --radius-sm: 0.25rem;     /* 4px */
+  --radius-md: 0.5rem;      /* 8px */
+  --radius-lg: 0.75rem;     /* 12px */
+  --radius-xl: 1rem;        /* 16px */
+  --radius-full: 9999px;    /* Full round */
+
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 oklch(0.15 0.035 263.95 / 0.05);
+  --shadow-md: 0 4px 6px -1px oklch(0.15 0.035 263.95 / 0.1), 0 2px 4px -1px oklch(0.15 0.035 263.95 / 0.06);
+  --shadow-lg: 0 10px 15px -3px oklch(0.15 0.035 263.95 / 0.1), 0 4px 6px -2px oklch(0.15 0.035 263.95 / 0.05);
+  --shadow-xl: 0 20px 25px -5px oklch(0.15 0.035 263.95 / 0.1), 0 10px 10px -5px oklch(0.15 0.035 263.95 / 0.04);
+
+  /* === ANIMATION DURATIONS === */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* === Z-INDEX SCALE === */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* === GLOBAL STYLES === */
+body {
+  @apply bg-secondary text-primary font-sans antialiased;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  line-height: 1.6;
+}
+
+/* === MALAYALAM TEXT SUPPORT === */
+.malayalam-text {
+  font-family: var(--font-malayalam);
+  direction: ltr;
+  text-align: left;
+  line-height: 1.8;
+}
+
+/* === SCROLLBAR STYLING === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.95 0.005 258.32);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.65 0.015 258.32);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.52 0.018 258.32);
+}
+
+/* === FOCUS STYLES === */
+*:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* === SELECTION STYLES === */
+::selection {
+  background-color: oklch(0.7045 0.1926 39.23 / 0.2);
+  color: var(--color-primary);
+}
+
+/* === PRINT STYLES === */
+@media print {
+  body {
+    color: black;
+    background: white;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}

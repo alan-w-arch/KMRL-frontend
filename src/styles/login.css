@@ -1,0 +1,64 @@
+/* login.css */
+@import "tailwindcss";
+
+/* Diagonal split for desktop */
+.bg-split-layer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #0f2b4a 0%, #0f2b4a 100%);
+  clip-path: polygon(0 0, 50% 0, 60% 100%, 0 100%);
+  z-index: 1;
+}
+.bg-split-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f6f9fb;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 60% 100%);
+}
+
+/* Vertical split for mobile */
+.bg-split-layer-mobile {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #0f2b4a 0%, #0f2b4a 40%, #f6f9fb 40%, #f6f9fb 100%);
+  z-index: 1;
+}
+
+/* Diamond card - Maintain original style */
+.diamond-outer {
+  @apply w-80 h-80 grid place-items-center rotate-45 border-2 rounded-2xl shadow-xl bg-gradient-to-b from-white to-gray-50;
+}
+.diamond-inner {
+  @apply w-56 h-56 -rotate-45 rounded-xl flex items-center justify-center relative overflow-hidden;
+}
+
+
+/* Media queries for the diamond */
+@media (max-width: 768px) {
+  .diamond-outer {
+    width: 280px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .diamond-outer {
+    width: 260px;
+    height: 280px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bg-split-layer-mobile {
+    background: linear-gradient(180deg, #0f2b4a 0%, #0f2b4a 35%, #f6f9fb 35%, #f6f9fb 100%);
+  }
+}
+
+/* Ensure scrollability on mobile */
+@media (max-width: 768px) {
+  .overflow-hidden {
+    overflow-y: auto;
+  }
+}
